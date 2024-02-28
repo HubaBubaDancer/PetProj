@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using PetProject;
 using PetProject.Components;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 var defaultConnection = builder.Configuration["Connections:ConnectionString"];
@@ -28,6 +27,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
