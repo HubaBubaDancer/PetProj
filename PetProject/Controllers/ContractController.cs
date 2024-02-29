@@ -3,7 +3,8 @@ using PetProject.Models;
 
 namespace PetProject.Controllers;
 
-[Controller]
+[Route("api/[controller]/[action]")]
+[ApiController]
 public class ContractController : Controller
 {
     
@@ -15,17 +16,36 @@ public class ContractController : Controller
     }
 
     [HttpPost]
-    public IActionResult Client()
+    public IActionResult CreateClient(string Name, string Licence, string Pass)
     {
-        var responce = new ObjectResult(new Client
+        var responce = new Client
         {
-            Name = "TestName", Licence = "Test",
-            Pass = "TestPass"
-        });
+            Name = Name, Licence = Licence,
+            Pass = Pass
+        };
 
         _context.Add(responce);
         _context.SaveChanges();
         
-        return responce;
+        return new ObjectResult(responce);
     }
+    
+    [HttpGet]
+    public IActionResult GetClients()
+    {
+        var result = _context.Clients.ToList();
+        return new ObjectResult(result);
+    }
+
+    [HttpDelete]
+    public IActionResult DeleteClient(Guid id)
+    {
+        var result = _context.Clients.FirstOrDefault(c => c.id == id);
+
+        _context.Remove(result);
+        _context.SaveChanges();
+
+        return new ObjectResult(result);
+    }
+
 }
