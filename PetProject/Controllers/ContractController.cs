@@ -1,5 +1,8 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PetProject.Handlers;
 using PetProject.Models;
+using PetProject.ModelsDTO;
 
 namespace PetProject.Controllers;
 
@@ -7,12 +10,13 @@ namespace PetProject.Controllers;
 [ApiController]
 public class ContractController : Controller
 {
-    
+    private readonly IMediator _mediator;
     public AppDbContext _context { get; set; }
 
-    public ContractController(AppDbContext context)
+    public ContractController(AppDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -29,6 +33,14 @@ public class ContractController : Controller
         
         return new ObjectResult(responce);
     }
+
+    [HttpPost("ProperWay")]
+    public async Task<Client> CreateClientTwo([FromBody] ClientDto clientDto)
+    {
+        var client = _mediator.Send(new CreateClientRequest(clientDto)).Result;
+        return client;
+    }
+    
     
     [HttpGet]
     public IActionResult GetClients()
