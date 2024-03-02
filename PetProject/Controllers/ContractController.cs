@@ -60,4 +60,12 @@ public class ContractController : Controller
         return new ObjectResult(result);
     }
 
+    [HttpPost]
+    public async Task<Car> CreateCar([FromBody] CarDto carDto)
+    {
+        var car = _mediator.Send(new CreateCarRequest(carDto)).Result;
+        return car;
+    }
+    
+
 }
