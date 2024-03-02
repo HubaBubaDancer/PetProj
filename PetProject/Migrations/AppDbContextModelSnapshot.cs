@@ -42,7 +42,7 @@ namespace PetProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("PetProject.Models.Client", b =>
@@ -68,7 +68,7 @@ namespace PetProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("PetProject.Models.Contract", b =>
@@ -97,7 +97,7 @@ namespace PetProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contracts", (string)null);
                 });
 #pragma warning restore 612, 618
         }
