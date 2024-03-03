@@ -11,6 +11,7 @@ public class AppMappingProfile : Profile
     {
         CreateMap<ClientDto, Client>();
         CreateMap<CarDto, Car>();
+        CreateMap<ContractDto, Contract>();
     }
     
     
